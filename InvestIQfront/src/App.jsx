@@ -1,48 +1,34 @@
-import React from "react";
-import Sidebar from "react-sidebar";
+import { useState } from 'react'
+import reactLogo from './assets/react.svg'
+import './App.css'
 
-const mql = window.matchMedia(`(min-width: 800px)`);
+function App() {
+  const [count, setCount] = useState(0)
 
-class App extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      sidebarDocked: mql.matches,
-      sidebarOpen: false
-    };
-
-    this.mediaQueryChanged = this.mediaQueryChanged.bind(this);
-    this.onSetSidebarOpen = this.onSetSidebarOpen.bind(this);
-  }
-
-  componentWillMount() {
-    mql.addListener(this.mediaQueryChanged);
-  }
-
-  componentWillUnmount() {
-    mql.removeListener(this.mediaQueryChanged);
-  }
-
-  onSetSidebarOpen(open) {
-    this.setState({ sidebarOpen: open });
-  }
-
-  mediaQueryChanged() {
-    this.setState({ sidebarDocked: mql.matches, sidebarOpen: false });
-  }
-
-  render() {
-    return (
-      <Sidebar
-        sidebar={<b>Sidebar content</b>}
-        open={this.state.sidebarOpen}
-        docked={this.state.sidebarDocked}
-        onSetOpen={this.onSetSidebarOpen}
-      >
-        <b>Main content</b>
-      </Sidebar>
-    );
-  }
+  return (
+    <div className="App">
+      <div>
+        <a href="https://vitejs.dev" target="_blank">
+          <img src="/vite.svg" className="logo" alt="Vite logo" />
+        </a>
+        <a href="https://reactjs.org" target="_blank">
+          <img src={reactLogo} className="logo react" alt="React logo" />
+        </a>
+      </div>
+      <h1>Vite + React</h1>
+      <div className="card">
+        <button onClick={() => setCount((count) => count + 1)}>
+          count is {count}
+        </button>
+        <p>
+          Edit <code>src/App.jsx</code> and save to test HMR
+        </p>
+      </div>
+      <p className="read-the-docs">
+        Click on the Vite and React logos to learn more
+      </p>
+    </div>
+  )
 }
 
-export default App;
+export default App
